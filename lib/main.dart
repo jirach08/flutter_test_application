@@ -39,11 +39,18 @@ class MyRoomState{
   void toggle(){
     occupied = !occupied;
   }
+  Color get color {
+    if (occupied) {
+      return Colors.red;
+    }
+    else {
+      return Colors.green;
+    }
+  }
 }
 
 class MyRoomStatesNotifier extends ChangeNotifier {
   var rooms = [for (int i in [0,1,2]) MyRoomState(i, "room$i")];
-
   void toggle(int i) {
     rooms[i].toggle();
     notifyListeners();
@@ -58,12 +65,15 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          for (var room in context.rooms)
+          for (var room in appState.rooms)
             ElevatedButton(
               child: Text(room.name),
               onPressed: (){
                 appState.toggle(room.id);
               },
+              style: ButtonStyle(
+                backgroundColor:  MaterialStateProperty.all<Color>(room.color),
+              ),
             ),
           ],
         ),
