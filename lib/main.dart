@@ -1,4 +1,3 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,7 +49,7 @@ class MyRoomState{
 }
 
 class MyRoomStatesNotifier extends ChangeNotifier {
-  var rooms = [for (int i in [0,1,2]) MyRoomState(i, "room$i")];
+  var rooms = [for (int i in [0,1,2]) MyRoomState(i, "Raum $i")];
   void toggle(int i) {
     rooms[i].toggle();
     notifyListeners();
@@ -73,6 +72,7 @@ class MyHomePage extends StatelessWidget {
               },
               style: ButtonStyle(
                 backgroundColor:  MaterialStateProperty.all<Color>(room.color),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
               ),
             ),
           ],
